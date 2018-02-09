@@ -20,7 +20,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '9l75b@i==$f#5nvciy*onsux_z*9k*8pf2ks^2uwb2d8%+umfx'
+SECRET_KEY = '63#^9jx9qfs%^#ef+ox=-89k(fry5bdbtp5gq(#b8-wcmnkddk'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -38,12 +38,14 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
-    
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.github',
+
     'crispy_forms',
     'users',
-    'homepage'
-   
-    
+    'homepage',
 ]
 
 MIDDLEWARE = [
@@ -126,8 +128,16 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+
+
 AUTH_USER_MODEL = 'users.CustomUser'
 
+AUTHENTICATION_BACKENDS = (
+    "django.contrib.auth.backends.ModelBackend",
+    "allauth.account.auth_backends.AuthenticationBackend",
+)
+
+SITE_ID = 1
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
 
@@ -135,8 +145,8 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
-EMAIL_HOST = 'smtp.sendgrid.net'
-EMAIL_HOST_USER = 'sendgrid_username' # update
-EMAIL_HOST_PASSWORD = 'sendgrid_password' # update
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
+# EMAIL_HOST = 'smtp.sendgrid.net'
+# EMAIL_HOST_USER = 'sendgrid_username' # update
+# EMAIL_HOST_PASSWORD = 'sendgrid_password' # update
+# EMAIL_PORT = 587
+# EMAIL_USE_TLS = True
